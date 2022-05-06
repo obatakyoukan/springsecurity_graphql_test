@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.boot.autoconfigure.security.SecurityProperties
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpMethod
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -26,10 +27,12 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
     override fun configure(http: HttpSecurity) {
         logger.info("configure http")
         http.authorizeRequests()
+            .mvcMatchers(HttpMethod.POST,"/graphql**").permitAll()
             .anyRequest().permitAll()
             .and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
             //.addFilterBefore()
+            .csrf().disable()
     }
 
     override fun configure(auth: AuthenticationManagerBuilder?) {

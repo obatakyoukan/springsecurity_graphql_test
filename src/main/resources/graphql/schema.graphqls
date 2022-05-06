@@ -19,3 +19,11 @@ type ResponseMessage{
 type Query{
     test : ResponseMessage
 }
+
+type Mutation {
+    add(
+        name : String!
+        email : String!
+        password : String!
+    ) : ResponseMessage!
+}

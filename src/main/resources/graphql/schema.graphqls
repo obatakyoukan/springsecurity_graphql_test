@@ -1,0 +1,21 @@
+type User{
+    id : ID!
+    name : String!
+    email : String!
+    password : String!
+    created_at : String!
+    modified_at : String!
+}
+
+type ResponseUserList{
+    message : String!
+    result : [User]
+}
+
+type ResponseMessage{
+    message : String!
+}
+
+type Query{
+    test : ResponseMessage
+}

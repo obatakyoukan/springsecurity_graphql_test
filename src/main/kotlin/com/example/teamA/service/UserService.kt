@@ -21,6 +21,7 @@ class UserService {
 
     fun findAll() = userRepository.findAll()
     fun findByEmail(email: String) = userRepository.findByEmail(email)
+    fun findById(id : String) = userRepository.findById(id)
 
     fun createUser(name : String, email : String, password : String){
         logger.info("create User")

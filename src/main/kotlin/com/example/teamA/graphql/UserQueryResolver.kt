@@ -1,6 +1,8 @@
 package com.example.teamA.graphql
 
 import com.example.teamA.entity.ResponseMessage
+import com.example.teamA.entity.ResponseUser
+import com.example.teamA.entity.ResponseUserList
 import com.example.teamA.service.UserService
 import graphql.kickstart.tools.GraphQLQueryResolver
 import org.slf4j.Logger
@@ -16,9 +18,26 @@ class UserQueryResolver : GraphQLQueryResolver{
     private val logger : Logger
         = LoggerFactory.getLogger(UserQueryResolver::class.java)
 
-    fun test() : ResponseMessage {
-        logger.info("test")
+    fun test() : ResponseMessage{
+        println(ResponseUserList("ok",userService.findAll()))
         return ResponseMessage("ok")
+    }
+
+    fun getUserByEmail(email : String) :
+           // ResponseMessage
+            ResponseUser
+    {
+        logger.info("start getUserByEmail")
+        logger.info(email)
+        var user = userService.findByEmail(email)
+        println(user)
+        return ResponseUser("ok", user)
+    }
+
+    fun getUserList() : ResponseUserList {
+        logger.info("get user list")
+        var userList = userService.findAll()
+        return ResponseUserList("ok", userList)
     }
 
 }

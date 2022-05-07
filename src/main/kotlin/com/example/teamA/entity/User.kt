@@ -11,10 +11,11 @@ import javax.persistence.*
 @Data
 data class User(
     @Id
-    var uuid : UUID = UUID.randomUUID(),
+    //var uuid : UUID = UUID.randomUUID(),
+    var uuid : String = UUID.randomUUID().toString(),
     @Column(name="name", nullable = false)
     var name : String,
-    @Column(name="email", nullable = false)
+    @Column(name="email", nullable = false, unique = true)
     val email : String,
     @Column(name="password", nullable = false)
     var password: String,

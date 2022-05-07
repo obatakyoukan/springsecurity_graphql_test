@@ -33,6 +33,8 @@ class UserService {
             created_at = date,
             updated_at = date
         )
+        logger.info(user.toString())
+        println(user)
         userRepository.save(user)
     }
 

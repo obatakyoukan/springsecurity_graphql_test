@@ -1,10 +1,11 @@
 type User{
-    id : ID!
+    uuid : ID!
     name : String!
     email : String!
     password : String!
-    created_at : String!
-    modified_at : String!
+    #Date型をどう扱うかを考える
+    #created_at : String!
+    #modified_at : String!
 }
 
 type ResponseUserList{
@@ -12,16 +13,28 @@ type ResponseUserList{
     result : [User]
 }
 
+type ResponseUser{
+    message : String!
+    result : User
+}
+
 type ResponseMessage{
     message : String!
 }
 
 type Query{
-    test : ResponseMessage
+    test : ResponseMessage!
+    getUserList : ResponseUserList!
+
+    getUserByEmail(
+        email :  String!
+        ):
+        ResponseUser
+        #ResponseMessage!
 }
 
 type Mutation {
-    add(
+    signup(
         name : String!
         email : String!
         password : String!

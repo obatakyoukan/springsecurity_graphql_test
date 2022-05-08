@@ -32,7 +32,6 @@ class SimpleAuthenticationSuccessHandler : AuthenticationSuccessHandler {
         response: HttpServletResponse?,
         authentication: Authentication?
     ) {
-
         if( response!!.isCommitted() ){
             logger.info("Response has already committed.")
             return
@@ -68,6 +67,7 @@ class SimpleAuthenticationSuccessHandler : AuthenticationSuccessHandler {
     ){
         response.setHeader("Authorization" , "Bearer %s".format(token) )
     }
+
     private fun clearAuthenticationAttributes(
         request: HttpServletRequest
     ){

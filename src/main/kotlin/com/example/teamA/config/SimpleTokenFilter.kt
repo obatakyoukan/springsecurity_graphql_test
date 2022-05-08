@@ -9,6 +9,8 @@ import com.example.teamA.entity.SimpleLoginUser
 import com.example.teamA.entity.User
 import com.example.teamA.service.UserService
 import lombok.extern.slf4j.Slf4j
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
@@ -28,6 +30,8 @@ class SimpleTokenFilter : GenericFilterBean {
 
     private var algorithm : Algorithm
 
+    //private val logger : Logger
+    //    = LoggerFactory.getLogger(SimpleTokenFilter::class.java)
 
     constructor(userService: UserService){
         this.algorithm = SecurityConfig().jwtAlgorithm()
@@ -38,6 +42,7 @@ class SimpleTokenFilter : GenericFilterBean {
     {
         var token : String? = resolveToken(request)
         if( token == null ){
+            logger.debug("token is null")
             chain!!.doFilter(request,response)
             return
         }
@@ -58,7 +63,6 @@ class SimpleTokenFilter : GenericFilterBean {
             logger.info("request is null in func resolveToken")
             return null
         }
-
 
         var token : String? =
             (request as HttpServletRequest)

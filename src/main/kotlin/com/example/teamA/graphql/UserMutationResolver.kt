@@ -35,7 +35,7 @@ class UserMutationResolver : GraphQLMutationResolver {
         return ResponseMessage("ok")
     }
 
-    //@PreAuthorize("isAnonymous()")
+    @PreAuthorize("isAnonymous()")
     fun login(email: String, password: String) : ResponseMessage? {
         val credentials = UsernamePasswordAuthenticationToken(email, password)
         try {

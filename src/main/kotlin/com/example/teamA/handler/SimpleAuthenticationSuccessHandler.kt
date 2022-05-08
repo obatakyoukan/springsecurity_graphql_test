@@ -12,6 +12,8 @@ import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import com.example.teamA.config.SecurityConfig
 import com.example.teamA.entity.SimpleLoginUser
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.security.web.WebAttributes
 import javax.servlet.http.HttpSession
@@ -19,7 +21,8 @@ import javax.servlet.http.HttpSession
 @Slf4j
 class SimpleAuthenticationSuccessHandler : AuthenticationSuccessHandler {
     private var algorithm : Algorithm
-
+    private val logger : Logger
+        = LoggerFactory.getLogger(SimpleAuthenticationSuccessHandler::class.java)
     constructor(){
         this.algorithm = SecurityConfig().jwtAlgorithm()
     }
@@ -31,7 +34,7 @@ class SimpleAuthenticationSuccessHandler : AuthenticationSuccessHandler {
     ) {
 
         if( response!!.isCommitted() ){
-            //log.info("Response has already committed.")
+            logger.info("Response has already committed.")
             return
         }
         setToken(response,generateToken(authentication!!))
@@ -55,6 +58,7 @@ class SimpleAuthenticationSuccessHandler : AuthenticationSuccessHandler {
             .withClaim("X-NAME", simpleLoginUser.getUser().name)
             .withClaim("X-EMAIL",simpleLoginUser.getUser().email)
             .sign(this.algorithm)
+        logger.debug("generate token : {}", token)
         return token
     }
 

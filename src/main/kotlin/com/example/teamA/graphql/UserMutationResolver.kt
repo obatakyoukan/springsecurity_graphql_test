@@ -38,7 +38,7 @@ class UserMutationResolver : GraphQLMutationResolver {
     //@PreAuthorize("isAnonymous()")
     fun login(email: String, password: String) : ResponseMessage? {
         val credentials = UsernamePasswordAuthenticationToken(email, password)
-        return try {
+        try {
             SecurityContextHolder.getContext().authentication = authenticationProvider.authenticate(credentials)
             simpleUserDetailService.getCurrentUser()
             logger.info("end login")

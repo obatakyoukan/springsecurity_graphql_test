@@ -1,5 +1,6 @@
 package com.example.teamA.service
 
+import com.example.teamA.config.SecurityConfig
 import com.example.teamA.entity.User
 import com.example.teamA.repository.UserRepository
 import org.slf4j.Logger
@@ -17,7 +18,7 @@ class UserService {
 
     private val logger : Logger = LoggerFactory.getLogger(UserService::class.java)
     private val passwordEncoder : PasswordEncoder
-            = PasswordEncoderFactories.createDelegatingPasswordEncoder()
+            = SecurityConfig().passwordEncoder()
 
     fun findAll() = userRepository.findAll()
     fun findByEmail(email: String) = userRepository.findByEmail(email)

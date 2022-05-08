@@ -39,4 +39,9 @@ type Mutation {
         email : String!
         password : String!
     ) : ResponseMessage!
+    login(
+        email : String!
+        password : String!
+    ) : ResponseMessage!
+
 }

@@ -47,7 +47,12 @@ dependencies {
 	implementation("com.graphql-java-kickstart:graphql-spring-boot-starter:12.0.0")
 	//jwt
 	implementation("com.auth0:java-jwt:3.19.1")
-
+	runtimeOnly("com.graphql-java-kickstart:graphiql-spring-boot-starter:8.0.0")
+	// To embed GraphiQL tool
+	implementation("com.graphql-java-kickstart:graphiql-spring-boot-starter:8.0.0")
+	implementation("io.reactivex.rxjava2:rxjava")
+	implementation("io.projectreactor:reactor-core")
+	implementation("org.springframework.boot:spring-boot-starter-websocket")
 }
 
 tasks.withType<KotlinCompile> {
